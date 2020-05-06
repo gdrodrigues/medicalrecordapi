@@ -4,10 +4,9 @@ import com.example.medicalrecordapi.model.Patient;
 import com.example.medicalrecordapi.repository.PatientRepository;
 import com.example.medicalrecordapi.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -22,9 +21,22 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping
-    public Optional getById(@PathVariable long id){
-        return patientService.getPatientById(id);
+    @GetMapping("/patient/{id}")
+    public ResponseEntity<Patient> getPatientById(@PathVariable(value = "id") long id){
+        Optional<Patient> patientO = patientService.getPatientById(id);
+
+        if(!patientO.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<Patient>(patientO.get(), HttpStatus.OK);
+        }
     }
+
+    @PostMapping
+    public ResponseEntity<Patient> criarPatient(@RequestBody Patient patient){
+        Patient patient1 = patientService.salvar(patient);
+        return new ResponseEntity<Patient>(patient1, HttpStatus.CREATED);
+    }
+
 
 }
