@@ -1,4 +1,4 @@
-package com.example.medicalrecordapi.entity;
+package com.example.medicalrecordapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "TB_Patient")
 public class Patient {
 
     @Id
@@ -38,5 +38,8 @@ public class Patient {
 
     @Column(nullable = false)
     private String Tel;
+
+    @Column(nullable = false, unique = true)
+    private String CPF;
 
 }
