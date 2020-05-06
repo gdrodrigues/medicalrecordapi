@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 
-@RestController
+
 @RequestMapping("/doctor")
+@RestController
 public class DoctorController {
 
     private final DoctorService doctorService;

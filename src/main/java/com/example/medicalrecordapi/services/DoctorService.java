@@ -12,7 +12,13 @@ import java.util.Optional;
 //@AllArgsConstructor(onConstructor = @__(Autowired))
 public class DoctorService {
 
-    private DoctorRepository doctorRepository;
+    private final DoctorRepository doctorRepository;
+
+    @Autowired
+    public DoctorService (DoctorRepository doctorRepository){
+        this.doctorRepository=doctorRepository;
+    }
+
 
     public Optional<Doctor> getDoctorById(long id){
         return doctorRepository.findById(id);
