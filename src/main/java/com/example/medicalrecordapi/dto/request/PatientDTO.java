@@ -13,6 +13,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Builder
 @Data
@@ -41,9 +42,11 @@ public class PatientDTO {
     @NotEmpty
     private String CEP;
 
+    @Size(min=12, max=13)
     private String Tel;
 
     @NotEmpty
     @CPF
     private String CPF;
+
 }

@@ -1,5 +1,6 @@
 package com.example.medicalrecordapi.controller;
 
+import com.example.medicalrecordapi.dto.request.PatientDTO;
 import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
 import com.example.medicalrecordapi.entity.Patient;
 import com.example.medicalrecordapi.services.PatientService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +23,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/patient/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable(value = "id") long id){
         Optional<Patient> patientO = patientService.getPatientById(id);
 
@@ -34,9 +36,9 @@ public class PatientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO criarPatient(@RequestBody Patient patient){
+    public MessageResponseDTO criarPatient(@RequestBody @Valid PatientDTO patientDTO){
 
-        return patientService.salvar(patient);
+        return patientService.salvar(patientDTO);
     }
 
 

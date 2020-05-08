@@ -7,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @NoArgsConstructor  // Contrutores
 @AllArgsConstructor // Construtores
 @Builder    // Padrao de projeto -> construçao dos objetos
 @Data      // Getter e Setter
 @Entity
-@Table(name= "TB_Doctor")
+@Table(name = "TB_Doctor")
 public class Doctor {
 
     @Id
@@ -24,10 +25,9 @@ public class Doctor {
     private String name;
 
     @Column(nullable = false)
-    private String birthDate;
+    private LocalDate birthDate;
 
-    @Column(nullable = false , unique = true)
-    private String CRM;
-
+    @Column(nullable = false, unique = true)
+    private String crm;
 
 }
