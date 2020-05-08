@@ -1,8 +1,10 @@
 package com.example.medicalrecordapi.services;
 
 
-import com.example.medicalrecordapi.model.Patient;
+import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
+import com.example.medicalrecordapi.entity.Patient;
 import com.example.medicalrecordapi.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +14,7 @@ public class PatientService  {
 
     private PatientRepository patientRepository;
 
+    @Autowired // Injetar dependencia
     public PatientService(PatientRepository patientRepository){
 
         this.patientRepository=patientRepository;
@@ -22,8 +25,12 @@ public class PatientService  {
         return patient;
     }
 
-    public Patient salvar(Patient patient){
-        return patientRepository.save(patient);
+    public MessageResponseDTO salvar(Patient patient){
+
+        return MessageResponseDTO
+                .builder()
+                .message("Created patient with ID: " + patient.getId())
+                .build();
     }
 
 

@@ -1,7 +1,7 @@
 package com.example.medicalrecordapi.controller;
 
-import com.example.medicalrecordapi.model.Patient;
-import com.example.medicalrecordapi.repository.PatientRepository;
+import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
+import com.example.medicalrecordapi.entity.Patient;
 import com.example.medicalrecordapi.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,9 +33,10 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<Patient> criarPatient(@RequestBody Patient patient){
-        Patient patient1 = patientService.salvar(patient);
-        return new ResponseEntity<Patient>(patient1, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO criarPatient(@RequestBody Patient patient){
+
+        return patientService.salvar(patient);
     }
 
 

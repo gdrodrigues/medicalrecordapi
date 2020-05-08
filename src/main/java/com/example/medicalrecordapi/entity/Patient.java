@@ -1,5 +1,7 @@
-package com.example.medicalrecordapi.model;
+package com.example.medicalrecordapi.entity;
 
+import com.example.medicalrecordapi.enums.EthnicityGroups;
+import com.example.medicalrecordapi.enums.MaritalStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,10 +27,11 @@ public class Patient {
     @Column(nullable = false)
     private String birthDate;
 
-    private String ethnicityGroup;
+    @Enumerated(value = EnumType.STRING)
+    private EthnicityGroups ethnicityGroups;
 
-
-    private String maritalStatus;
+    @Enumerated(value = EnumType.STRING)
+    private MaritalStatus maritalStatus;
 
     @Column(nullable = false)
     private String adress;

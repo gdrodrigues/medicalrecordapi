@@ -1,4 +1,4 @@
-package com.example.medicalrecordapi.model;
+package com.example.medicalrecordapi.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Data
+@NoArgsConstructor  // Contrutores
+@AllArgsConstructor // Construtores
+@Builder    // Padrao de projeto -> construçao dos objetos
+@Data      // Getter e Setter
 @Entity
 @Table(name= "TB_Doctor")
 public class Doctor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //estratégia de geração de ID
     private long id;
 
     @Column(nullable = false)
