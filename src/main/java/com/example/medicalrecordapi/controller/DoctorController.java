@@ -45,6 +45,11 @@ public class DoctorController {
 
     }
 
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable long id, @RequestBody @Valid DoctorDTO doctorDTO) throws DoctorNotFoundException {
+        return doctorService.updateById(id, doctorDTO);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById( @PathVariable long id) throws DoctorNotFoundException {

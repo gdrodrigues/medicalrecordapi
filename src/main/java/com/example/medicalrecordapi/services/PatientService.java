@@ -1,6 +1,5 @@
 package com.example.medicalrecordapi.services;
 
-
 import com.example.medicalrecordapi.dto.request.PatientDTO;
 import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
 import com.example.medicalrecordapi.entity.Patient;
@@ -36,11 +35,8 @@ public class PatientService  {
     public MessageResponseDTO salvar(PatientDTO patientDTO){
         Patient patientToSave = patientMapper.toModel(patientDTO);
 
-        Patient savedPatient = patientRepository.save(patientToSave);
-        return MessageResponseDTO
-                .builder()
-                .message("Created patient with ID: " + savedPatient.getId())
-                .build();
+        Patient updatedPatient = patientRepository.save(patientToSave);
+        return CreateMessageResponse(updatedPatient.getId(), "Created patient with ID: ");
     }
 
     public List<PatientDTO> findAll(){
@@ -52,10 +48,18 @@ public class PatientService  {
 
     }
 
-
     public void delete(long id) throws PatientNotFoundException {
         VerifyIfExists(id);
         patientRepository.deleteById(id);
+    }
+
+    public MessageResponseDTO updateById(long id, PatientDTO patientDTO) throws PatientNotFoundException {
+
+        VerifyIfExists(id);
+        Patient patientToUpdate = patientMapper.toModel(patientDTO);
+
+        Patient savedPatient = patientRepository.save(patientToUpdate);
+        return CreateMessageResponse(savedPatient.getId(), "Updated patient with ID: ");
     }
 
     private Optional<Patient> VerifyIfExists(long id) throws PatientNotFoundException {
@@ -64,5 +68,12 @@ public class PatientService  {
             throw new PatientNotFoundException(id);
         }
         return patientO;
+    }
+
+    private MessageResponseDTO CreateMessageResponse(long id, String s) {
+        return MessageResponseDTO
+                .builder()
+                .message(s + id)
+                .build();
     }
 }

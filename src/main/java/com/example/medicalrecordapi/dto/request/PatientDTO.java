@@ -42,7 +42,7 @@ public class PatientDTO {
     @NotEmpty
     private String CEP;
 
-    @Size(min=12, max=13)
+    @Size(min=9, max=13)
     private String Tel;
 
     @NotEmpty
