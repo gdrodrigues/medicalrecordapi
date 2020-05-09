@@ -2,14 +2,13 @@ package com.example.medicalrecordapi.mapper;
 
 import com.example.medicalrecordapi.dto.request.PatientDTO;
 import com.example.medicalrecordapi.entity.Patient;
-import com.example.medicalrecordapi.entity.Patient.PatientBuilder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-05-08T09:02:35-0300",
+    date = "2020-05-09T08:23:52-0300",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.7 (AdoptOpenJDK)"
 )
 public class PatientMapperImpl implements PatientMapper {
@@ -20,20 +19,21 @@ public class PatientMapperImpl implements PatientMapper {
             return null;
         }
 
-        PatientBuilder patient = Patient.builder();
+        Patient patient = new Patient();
 
         if ( patientDTO.getBirthDate() != null ) {
-            patient.birthDate( LocalDate.parse( patientDTO.getBirthDate(), DateTimeFormatter.ofPattern( "dd-MM-yyyy" ) ) );
+            patient.setBirthDate( LocalDate.parse( patientDTO.getBirthDate(), DateTimeFormatter.ofPattern( "dd-MM-yyyy" ) ) );
         }
-        patient.id( patientDTO.getId() );
-        patient.nome( patientDTO.getNome() );
-        patient.ethnicityGroups( patientDTO.getEthnicityGroups() );
-        patient.maritalStatus( patientDTO.getMaritalStatus() );
-        patient.adress( patientDTO.getAdress() );
-        patient.CEP( patientDTO.getCEP() );
-        patient.CPF( patientDTO.getCPF() );
+        patient.setId( patientDTO.getId() );
+        patient.setNome( patientDTO.getNome() );
+        patient.setEthnicityGroups( patientDTO.getEthnicityGroups() );
+        patient.setMaritalStatus( patientDTO.getMaritalStatus() );
+        patient.setAdress( patientDTO.getAdress() );
+        patient.setCEP( patientDTO.getCEP() );
+        patient.setTel( patientDTO.getTel() );
+        patient.setCPF( patientDTO.getCPF() );
 
-        return patient.build();
+        return patient;
     }
 
     @Override

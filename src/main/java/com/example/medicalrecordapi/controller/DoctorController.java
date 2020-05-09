@@ -3,6 +3,7 @@ package com.example.medicalrecordapi.controller;
 import com.example.medicalrecordapi.dto.request.DoctorDTO;
 import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
 import com.example.medicalrecordapi.entity.Doctor;
+import com.example.medicalrecordapi.exception.DoctorNotFoundException;
 import com.example.medicalrecordapi.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,27 +27,15 @@ public class DoctorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Doctor> getDoctorById(@PathVariable(value = "id") long id) {
-        Optional<Doctor> doctorO = doctorService.getDoctorById(id);
-
-        if (!doctorO.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<Doctor>(doctorO.get(), HttpStatus.OK);
-        }
+    public DoctorDTO getDoctorById(@PathVariable long id) throws DoctorNotFoundException {
+        return doctorService.getDoctorById(id);
 
     }
 
-    @GetMapping("/doctor")
-    public ResponseEntity<List<Doctor>> getAllDoctors() {
-        List<Doctor> listDoctors = doctorService.findAll();
+    @GetMapping
+    public List<DoctorDTO> getAllDoctors() {
 
-        if (!listDoctors.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<List<Doctor>>(listDoctors, HttpStatus.OK);
-        }
-
+        return doctorService.findAllDoctors();
     }
 
     @PostMapping
@@ -54,6 +43,12 @@ public class DoctorController {
     public MessageResponseDTO criarDoctor(@RequestBody @Valid DoctorDTO doctorDTO) {
         return doctorService.salvar(doctorDTO);
 
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById( @PathVariable long id) throws DoctorNotFoundException {
+        doctorService.delete(id);
     }
 
 

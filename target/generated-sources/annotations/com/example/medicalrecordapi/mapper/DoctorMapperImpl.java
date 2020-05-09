@@ -1,7 +1,6 @@
 package com.example.medicalrecordapi.mapper;
 
 import com.example.medicalrecordapi.dto.request.DoctorDTO;
-import com.example.medicalrecordapi.dto.request.DoctorDTO.DoctorDTOBuilder;
 import com.example.medicalrecordapi.entity.Doctor;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-05-08T09:33:47-0300",
+    date = "2020-05-09T08:23:52-0300",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.7 (AdoptOpenJDK)"
 )
 public class DoctorMapperImpl implements DoctorMapper {
@@ -38,15 +37,15 @@ public class DoctorMapperImpl implements DoctorMapper {
             return null;
         }
 
-        DoctorDTOBuilder doctorDTO = DoctorDTO.builder();
+        DoctorDTO doctorDTO = new DoctorDTO();
 
-        doctorDTO.id( doctor.getId() );
-        doctorDTO.name( doctor.getName() );
+        doctorDTO.setId( doctor.getId() );
+        doctorDTO.setName( doctor.getName() );
         if ( doctor.getBirthDate() != null ) {
-            doctorDTO.birthDate( DateTimeFormatter.ISO_LOCAL_DATE.format( doctor.getBirthDate() ) );
+            doctorDTO.setBirthDate( DateTimeFormatter.ISO_LOCAL_DATE.format( doctor.getBirthDate() ) );
         }
-        doctorDTO.crm( doctor.getCrm() );
+        doctorDTO.setCrm( doctor.getCrm() );
 
-        return doctorDTO.build();
+        return doctorDTO;
     }
 }
