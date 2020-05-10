@@ -2,30 +2,22 @@ package com.example.medicalrecordapi.controller;
 
 import com.example.medicalrecordapi.dto.request.PatientDTO;
 import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
-import com.example.medicalrecordapi.entity.Patient;
 import com.example.medicalrecordapi.exception.PatientNotFoundException;
 import com.example.medicalrecordapi.services.PatientService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/patient")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PatientController {
 
     private final PatientService patientService;
-
-    @Autowired
-    PatientController(PatientService patientService){
-
-        this.patientService = patientService;
-    }
-
+    
     @GetMapping
     public List<PatientDTO> getAllPatients(){
         return patientService.findAll();

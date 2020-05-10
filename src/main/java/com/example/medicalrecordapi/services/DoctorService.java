@@ -16,18 +16,12 @@ import java.util.stream.Collectors;
 
 
 @Service
-//@AllArgsConstructor(onConstructor = @__(Autowired))
+@AllArgsConstructor(onConstructor = @__(@Autowired)) //injecao de dependencia automático
 public class DoctorService {
 
     private final DoctorMapper doctorMapper = DoctorMapper.INSTANCE;
 
     private final DoctorRepository doctorRepository;
-
-    @Autowired
-    public DoctorService(DoctorRepository doctorRepository) {
-
-        this.doctorRepository = doctorRepository;
-    }
 
 
     public List<DoctorDTO> findAllDoctors() {

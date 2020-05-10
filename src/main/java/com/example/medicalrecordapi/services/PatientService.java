@@ -6,6 +6,7 @@ import com.example.medicalrecordapi.entity.Patient;
 import com.example.medicalrecordapi.exception.PatientNotFoundException;
 import com.example.medicalrecordapi.mapper.PatientMapper;
 import com.example.medicalrecordapi.repository.PatientRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +15,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired)) //injecao de dependencia automático
 public class PatientService  {
 
     private final PatientMapper patientMapper = PatientMapper.INSTANCE;
 
     private PatientRepository patientRepository;
-
-    @Autowired // Injetar dependencia
-    public PatientService(PatientRepository patientRepository){
-
-        this.patientRepository=patientRepository;
-    }
 
     public PatientDTO getPatientById(long id) throws PatientNotFoundException {
         Optional<Patient> patientO = VerifyIfExists(id);
