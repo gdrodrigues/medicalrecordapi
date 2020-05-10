@@ -30,7 +30,7 @@ public class PatientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO criarPatient(@RequestBody @Valid PatientDTO patientDTO){
+    public MessageResponseDTO newPatient(@RequestBody @Valid PatientDTO patientDTO){
 
         return patientService.salvar(patientDTO);
     }

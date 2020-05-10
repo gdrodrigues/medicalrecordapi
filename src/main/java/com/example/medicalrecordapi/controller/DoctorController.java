@@ -34,7 +34,7 @@ public class DoctorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO criarDoctor(@RequestBody @Valid DoctorDTO doctorDTO) {
+    public MessageResponseDTO newDoctor(@RequestBody @Valid DoctorDTO doctorDTO) {
         return doctorService.salvar(doctorDTO);
 
     }
