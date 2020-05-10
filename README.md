@@ -5,17 +5,17 @@ Esse projeto está sendo desenvolvido com o objetivo de praticar o desenvolvimen
 
 Para executar o projeto no terminal, digite o seguinte comando:
 
-[mvn spring-boot:run]
+mvn spring-boot:run
 
 Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
 
-[http://localhost:8080/api/doctor] para a API com os dados dos médicos e
+http://localhost:8080/api/doctor para a API com os dados dos médicos e
 
-[http://localhost:8080/api/patient] para a API com os dados de pacientes
+http://localhost:8080/api/patient para a API com os dados de pacientes
 
 Foi realizado o deploy do projeto no Heroku, então para acessar a documentação da API, basta ir no seguinte link:
 
-[https://medicalrecordapi.herokuapp.com/swagger-ui.html]
+https://medicalrecordapi.herokuapp.com/swagger-ui.html
 
 Médicos:
 
