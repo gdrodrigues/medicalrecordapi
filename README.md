@@ -29,7 +29,7 @@ Tecnologias utilizadas:
 
 - Java 11
 - Spring Boot 2.2.6
-- JUnit 4
+- JUnit 5
 - Lombok
 - Map Struct
 - Maven
