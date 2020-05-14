@@ -4,7 +4,7 @@ import com.example.medicalrecordapi.dto.request.DoctorDTO;
 import com.example.medicalrecordapi.dto.response.MessageResponseDTO;
 import com.example.medicalrecordapi.entity.Doctor;
 import com.example.medicalrecordapi.exception.DoctorNotFoundException;
-import com.example.medicalrecordapi.mapper.DoctorMapper;
+import com.example.medicalrecordapi.dto.mapper.DoctorMapper;
 import com.example.medicalrecordapi.repository.DoctorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(onConstructor = @__(@Autowired)) //injecao de dependencia automático
 public class DoctorService {
 
-    private final DoctorMapper doctorMapper = DoctorMapper.INSTANCE;
+    private final DoctorMapper doctorMapper;
 
     private final DoctorRepository doctorRepository;
 
