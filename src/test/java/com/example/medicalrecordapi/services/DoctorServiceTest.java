@@ -12,9 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.validation.constraints.Max;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +32,8 @@ public class DoctorServiceTest {
 
     @InjectMocks
     private DoctorService doctorService;
+
+    private final long fakeId = 500L;
 
     @Test
     void testGivenDoctorDTOThenReturnSuccessSavedMessage() {
@@ -73,6 +72,14 @@ public class DoctorServiceTest {
     }
 
     @Test
+    void testGivenInvalidDoctorThenReturnException(){
+
+       when(doctorRepository.findById(fakeId)).thenReturn(Optional.ofNullable(any(Doctor.class)));
+
+       assertThrows(DoctorNotFoundException.class, ()-> doctorService.getDoctorById(fakeId));
+    }
+
+    @Test
     void testGivenNoDataThenReturnAllDoctors(){
         List<Doctor> expectedAllDoctors = Collections.singletonList(createFakeEntity());
         DoctorDTO doctorDTO = createFakeDoctorDTO();
@@ -87,6 +94,49 @@ public class DoctorServiceTest {
 
     }
 
+    @Test
+    void testGivenValidDoctorIdThenReturnNoData() throws DoctorNotFoundException {
+        Doctor expectedDoctor = createFakeEntity();
+
+        when(doctorRepository.findById(expectedDoctor.getId())).thenReturn(Optional.of(expectedDoctor));
+
+        doctorService.delete(expectedDoctor.getId());
+
+        verify(doctorRepository, times(1)).deleteById(expectedDoctor.getId());
+
+
+    }
+
+    @Test
+    void testGivenInvalidDoctorIdThenReturnNoData(){
+
+        when(doctorRepository.findById(fakeId)).thenReturn(Optional.ofNullable(any(Doctor.class)));
+
+        assertThrows(DoctorNotFoundException.class, ()-> doctorService.delete(fakeId));
+    }
+
+    @Test
+    void testGivenValidDoctorThenReturnSucessUpdateMessage() throws DoctorNotFoundException {
+        var updatedDoctorID = 2L;
+        DoctorDTO updatedDoctorDTO = createFakeDoctorDTO();
+
+        updatedDoctorDTO.setId(updatedDoctorID);
+        updatedDoctorDTO.setName("Flavio Seixas");
+
+        Doctor expectedDoctorUpdate = createFakeEntity();
+
+        expectedDoctorUpdate.setId(updatedDoctorID);
+        expectedDoctorUpdate.setName("Flavio Seixas");
+
+        when(doctorRepository.findById(updatedDoctorID)).thenReturn(Optional.of(expectedDoctorUpdate));
+        when(doctorMapper.toModel(updatedDoctorDTO)).thenReturn(expectedDoctorUpdate);
+        when(doctorRepository.save(any(Doctor.class))).thenReturn(expectedDoctorUpdate);
+
+        MessageResponseDTO sucessMessage = doctorService.updateById(updatedDoctorID, updatedDoctorDTO);
+
+        assertEquals("Updated doctor with ID: "+updatedDoctorID, sucessMessage.getMessage());
+
+    }
 
 
     private MessageResponseDTO CreateMessageResponse(long id) {
