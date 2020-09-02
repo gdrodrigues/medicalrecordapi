@@ -1,4 +1,4 @@
-# Construindo uma API para gerenciamento de dados de um prontuário eletrônico [Em desenvolvimento]
+# Construindo uma API para gerenciamento de dados de um prontuário eletrônico
 Medical Record API
 
 Esse projeto está sendo desenvolvido com o objetivo de praticar o desenvolvimento utilizando Spring Boot e as boas práticas aprendidas nas disciplinas de Engenharia de Software e Qualidade de Software.
